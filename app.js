@@ -26,6 +26,7 @@ app.use('/api', router)
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+
 const start = async () => {
   try {
     await db.authenticate();
