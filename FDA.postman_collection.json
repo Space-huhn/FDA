@@ -1,0 +1,932 @@
+{
+	"info": {
+		"_postman_id": "904f27c4-70e5-4da5-9c94-3cc6f3346fcc",
+		"name": "FDA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35369010"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "get product Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3050/api/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post product Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beared eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTg5NzI4LCJleHAiOjE3MzE2NzYxMjh9.OQE2159erjBXiK_o6TPuSbyncgKQgTpkDXZv_y5Rfh0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "product name",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "product description",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "ingredients",
+									"value": "[]",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/hannah-montez-2VslRz5G8fo-unsplash.jpg"
+								},
+								{
+									"key": "categoryId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one product by id Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3050/api/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beared eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTg5NzI4LCJleHAiOjE3MzE2NzYxMjh9.OQE2159erjBXiK_o6TPuSbyncgKQgTpkDXZv_y5Rfh0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "modify title",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "product description",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "0",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ingredients",
+									"value": "[]",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/hannah-montez-2VslRz5G8fo-unsplash.jpg",
+									"disabled": true
+								},
+								{
+									"key": "categoryId",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beared eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTg5NzI4LCJleHAiOjE3MzE2NzYxMjh9.OQE2159erjBXiK_o6TPuSbyncgKQgTpkDXZv_y5Rfh0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "product namelskvhksksbv",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "product description amsbjfvw khsfbak h",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "1329",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ingredients",
+									"value": "[]",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/hannah-montez-2VslRz5G8fo-unsplash.jpg",
+									"disabled": true
+								},
+								{
+									"key": "categoryId",
+									"value": "3",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/product/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"product",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"rusurobertchampionsx@gmail.com\",\r\n    \"password\": \"qwerty\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test name\",\r\n    \"email\": \"testrestAPI@gmail.com\",\r\n    \"password\": \"qwerty\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/user/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"user",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get profile Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTkwNzA5LCJleHAiOjE3MzE2NzcxMDl9.x-JboHzDtezVwtezJF6KBL4s7ymmPOprqOzvRN4U4IA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3050/api/user/profile/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"user",
+								"profile",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beared eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTg5NzI4LCJleHAiOjE3MzE2NzYxMjh9.OQE2159erjBXiK_o6TPuSbyncgKQgTpkDXZv_y5Rfh0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "address",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/Group 73.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/user/profile/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"user",
+								"profile",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beared eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTg5NzI4LCJleHAiOjE3MzE2NzYxMjh9.OQE2159erjBXiK_o6TPuSbyncgKQgTpkDXZv_y5Rfh0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "lang",
+									"value": "en",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTg5NzI4LCJleHAiOjE3MzE2NzYxMjh9.OQE2159erjBXiK_o6TPuSbyncgKQgTpkDXZv_y5Rfh0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/user/confirm-email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"user",
+								"confirm-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTkwNzA5LCJleHAiOjE3MzE2NzcxMDl9.x-JboHzDtezVwtezJF6KBL4s7ymmPOprqOzvRN4U4IA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "lang",
+									"value": "en",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTg5NzI4LCJleHAiOjE3MzE2NzYxMjh9.OQE2159erjBXiK_o6TPuSbyncgKQgTpkDXZv_y5Rfh0",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/user/confirm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"user",
+								"confirm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm email Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTkwNzA5LCJleHAiOjE3MzE2NzcxMDl9.x-JboHzDtezVwtezJF6KBL4s7ymmPOprqOzvRN4U4IA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "lang",
+									"value": "en",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTg5NzI4LCJleHAiOjE3MzE2NzYxMjh9.OQE2159erjBXiK_o6TPuSbyncgKQgTpkDXZv_y5Rfh0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/user/confirm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"user",
+								"confirm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beared eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTg5NzI4LCJleHAiOjE3MzE2NzYxMjh9.OQE2159erjBXiK_o6TPuSbyncgKQgTpkDXZv_y5Rfh0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "product namelskvhksksbv",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "product description amsbjfvw khsfbak h",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "1329",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ingredients",
+									"value": "[]",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/hannah-montez-2VslRz5G8fo-unsplash.jpg",
+									"disabled": true
+								},
+								{
+									"key": "categoryId",
+									"value": "3",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/product/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"product",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restaurant",
+			"item": [
+				{
+					"name": "create restaurant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "burgerking v2",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "restaurant fastfood",
+									"type": "text"
+								},
+								{
+									"key": "rating",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "deliveryTime",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "deliveryPrice",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__images__2015__07__20150728-homemade-whopper-food-lab-35-b3500a5c2f3e4e10aa3169d5f76e1468.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/restaurant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get restaurants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3050/api/restaurant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one restaurant by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3050/api/restaurant/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"restaurant",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update restaurant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "diferent description 1241341 rvrf",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/restaurant/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"restaurant",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete restaurant",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beared eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTg5NzI4LCJleHAiOjE3MzE2NzYxMjh9.OQE2159erjBXiK_o6TPuSbyncgKQgTpkDXZv_y5Rfh0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/restaurant/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"restaurant",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "get category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3050/api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one product by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3050/api/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "testCategory",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__images__2015__07__20150728-homemade-whopper-food-lab-35-b3500a5c2f3e4e10aa3169d5f76e1468.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTk0MzAzLCJleHAiOjE3MzE2ODA3MDN9.BpCT3nFY_WYrGfvWgP8PjoI1dswjB2MS0vqE6NMLJDg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "sushi",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": [
+										"/C:/Users/Admin/Downloads/hannah-montez-2VslRz5G8fo-unsplash.jpg",
+										"/C:/Users/Admin/Downloads/sushi-kakkoii.jpeg"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beared eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJ1c3Vyb2JlcnRjaGFtcGlvbnN4QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzMxNTg5NzI4LCJleHAiOjE3MzE2NzYxMjh9.OQE2159erjBXiK_o6TPuSbyncgKQgTpkDXZv_y5Rfh0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3050/api/category/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3050",
+							"path": [
+								"api",
+								"category",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
