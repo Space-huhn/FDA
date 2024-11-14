@@ -53,6 +53,8 @@ class UserController {
         {where: {email, name}}
       )
 
+      //add existing emile validation
+
       if (candidate) {
         return res.status(400).json({message: "email is already used"})
       }

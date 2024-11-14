@@ -15,3 +15,5 @@ router.put('/:id', authMiddleware, categoryController.updateCategory);
 router.delete('/:id', authMiddleware, categoryController.deleteCategory);
 
 module.exports = router;
+
+//restrict action for not authorization users

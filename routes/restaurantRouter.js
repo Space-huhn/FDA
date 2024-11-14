@@ -14,3 +14,4 @@ router.delete('/:id', restaurantsController.deleteRestaurant);
 
 module.exports = router;
 
+//restrict action for not authorization users

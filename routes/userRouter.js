@@ -14,4 +14,6 @@ router.get('/refreshToken', userController.regenerateToken);
 router.post('/resetPassword', userController.resetPassword);
 
 
+//rebuild confirmation email, confirm, refresh token, reset password, and user permission
+
 module.exports = router;
