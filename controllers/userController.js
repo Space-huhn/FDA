@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 const {where} = require("sequelize");
 const nodeMailer = require('nodemailer');
 const {jwtDecode} = require('jwt-decode')
+const Op = require('@sequelize/core');
+
 
 function generateToken(id, name, email, role) {
   return jwt.sign({id, name, email, role}, process.env.SECRET_KEY, {expiresIn: '24h'})
@@ -49,9 +51,18 @@ class UserController {
         return res.status(400).json({message: "empty form"})
       }
 
-      const candidate = await User.findOne(
-        {where: {email, name}}
+      const candidate = await User.findAll({
+          // {where: {email}}
+          where: {
+            [Op.or]: {
+              email,
+              name,
+            },
+          },
+        }
       )
+
+      console.log(candidate)
 
       //add existing emile validation
 
@@ -108,7 +119,6 @@ class UserController {
         {where: {email}}
       )
 
-
       sendMailFunc(decoded.email, lang, token).catch(console.error);
 
       return res.json({message: "Message was send"})
@@ -135,7 +145,27 @@ class UserController {
 
   async profileUpdate(req, res) {
     try {
-      const {id} = req.params
+      const {id} = req.params;
+
+      const token = req.headers.authorization?.split(' ')[1];
+      if (!token) {
+        return res.status(401).json({ message: "Unauthorized: Token is missing" });
+      }
+
+      let userIdFromToken;
+
+      try {
+        const decoded = jwtDecode(token);
+        userIdFromToken = decoded.id;
+      } catch (err) {
+        return res.status(401).json({ message: "Unauthorized: Invalid token" });
+      }
+
+      console.log(userIdFromToken)
+
+      if (userIdFromToken !== parseInt(id, 10)) {
+        return res.status(403).json({ message: "Forbidden: You can only update your own profile" });
+      }
 
       let filename;
       let textFields = {};
@@ -153,7 +183,6 @@ class UserController {
         const {avatar} = req.files;
         filename = uuid.v4() + ".jpg"
         await avatar.mv(path.resolve(__dirname, '..', 'static', filename))
-
         if (profile.avatar) {
           await fs.unlink(`${path.resolve(__dirname, '..', 'static', profile.avatar)}`, (err) => console.log(err))
         }
