@@ -7,8 +7,7 @@ const jwt = require("jsonwebtoken");
 const {where} = require("sequelize");
 const nodeMailer = require('nodemailer');
 const {jwtDecode} = require('jwt-decode')
-const Op = require('@sequelize/core');
-
+const { Op } = require('sequelize');
 
 function generateToken(id, name, email, role) {
   return jwt.sign({id, name, email, role}, process.env.SECRET_KEY, {expiresIn: '24h'})
@@ -45,34 +44,21 @@ const sendMailConfirmEmailFunc = async (email, lang, token) => {
 class UserController {
   async registration(req, res) {
     try {
+      if (!req.body) return res.status(401).json({message: "Empty form"});
+
       const {name, email, role, password} = req.body;
 
-      if (!name || !email || !password) {
-        return res.status(400).json({message: "empty form"})
-      }
-
-      const candidate = await User.findAll({
-          // {where: {email}}
-          where: {
-            [Op.or]: {
-              email,
-              name,
-            },
-          },
-        }
+      const candidate = await User.findOne(
+          {where: {email}}
       )
-
-      console.log(candidate)
-
-      //add existing emile validation
 
       if (candidate) {
         return res.status(400).json({message: "email is already used"})
       }
 
-      const hashPassword = await bcrypt.hash(password, 3)
+      const hashPassword = await bcrypt.hash(password, 3);
 
-      const user = await User.create({name, email, role, password: hashPassword})
+      const user = await User.create({name, email, role, password: hashPassword});
 
       const token = generateToken(user.id, name, email, user.role);
 
@@ -84,19 +70,16 @@ class UserController {
 
   async login(req, res) {
     try {
+      if (!req.body) return res.status(401).json({message: "Empty form"});
+
       const {email, password} = req.body;
+
       const user = await User.findOne(
         {where: {email}}
       )
 
-      if (!user) {
-        return res.status(500).json("user not exist")
-      }
-
-      let comparePassword = bcrypt.compareSync(password, user.password)
-
-      if (!comparePassword) {
-        return res.status(500).json("wrong pass")
+      if (!user || !bcrypt.compareSync(password, user.password)) {
+        return res.status(404).json({message: "User not found or access denied"})
       }
 
       const token = generateToken(user.id, user.name, user.email, user.role, user.isVerified)
@@ -107,30 +90,8 @@ class UserController {
     }
   }
 
-  async check(req, res) {
+  async getProfile(req, res) {
     try {
-      // if (req.method === "OPTIONS") return res.status(401).json({message: 'invalid method'});
-
-      const {email} = req.body;
-
-      console.log(email)
-
-      const user = await User.findOne(
-        {where: {email}}
-      )
-
-      sendMailFunc(decoded.email, lang, token).catch(console.error);
-
-      return res.json({message: "Message was send"})
-    } catch (e) {
-      res.status(500).json(e.message)
-    }
-  }
-
-  async profile(req, res) {
-    try {
-      if (req.method === "OPTIONS") return res.status(401).json({message: 'invalid method'});
-
       const {id} = req.params;
 
       const userProfile = await User.findOne(
@@ -147,61 +108,45 @@ class UserController {
     try {
       const {id} = req.params;
 
-      const token = req.headers.authorization?.split(' ')[1];
-      if (!token) {
-        return res.status(401).json({ message: "Unauthorized: Token is missing" });
-      }
+      if (!req.body) return res.status(401).json({message: "Empty form"})
 
-      let userIdFromToken;
+      const {name, email, password, address} = req.body;
 
-      try {
-        const decoded = jwtDecode(token);
-        userIdFromToken = decoded.id;
-      } catch (err) {
-        return res.status(401).json({ message: "Unauthorized: Invalid token" });
-      }
+      await User.update({
+        name, email, password, address
+      }, {where: {id}})
 
-      console.log(userIdFromToken)
+      return res.json({message: "Updated profile", profile: {name, email, address}})
+    } catch (e) {
+      return res.status(500).json(e.message)
+    }
+  }
 
-      if (userIdFromToken !== parseInt(id, 10)) {
-        return res.status(403).json({ message: "Forbidden: You can only update your own profile" });
-      }
+  async avatarUpdate(req, res) {
+    try {
+      if (!req.files) return res.status(401).json({message: "File not found"})
+
+      const {id} = req.params;
 
       let filename;
-      let textFields = {};
-
-      if (req.body) {
-        const {name, email, password, address} = req.body
-        textFields = {name, email, password, address}
-      }
 
       const profile = await User.findOne(
         {where: {id}}
       )
 
-      if (req.files && req.files.avatar) {
-        const {avatar} = req.files;
-        filename = uuid.v4() + ".jpg"
-        await avatar.mv(path.resolve(__dirname, '..', 'static', filename))
-        if (profile.avatar) {
-          await fs.unlink(`${path.resolve(__dirname, '..', 'static', profile.avatar)}`, (err) => console.log(err))
-        }
+      const {avatar} = req.files;
+      filename = uuid.v4() + ".jpg";
+      await avatar.mv(path.resolve(__dirname, '..', 'static', filename));
+
+      if (profile.avatar) {
+        await fs.unlink(`${path.resolve(__dirname, '..', 'static', profile.avatar)}`, (err) => console.log(err))
       }
 
-      const updateData = {
-        ...textFields,
-        ...(filename && {avatar: filename})
-      };
-
       await User.update({
-        ...updateData
+        avatar: filename
       }, {where: {id}})
 
-      const updateProfile = await User.findOne(
-        {where: {id}}
-      )
-
-      return res.json(updateProfile)
+      return res.json({ message: 'Avatar updated successfully', avatar: filename })
     } catch (e) {
       return res.status(500).json(e.message)
     }
@@ -257,6 +202,26 @@ class UserController {
     }
   }
 
+  async check(req, res) {
+    try {
+      // if (req.method === "OPTIONS") return res.status(401).json({message: 'invalid method'});
+
+      const {email} = req.body;
+
+      console.log(email)
+
+      const user = await User.findOne(
+        {where: {email}}
+      )
+
+      sendMailFunc(decoded.email, lang, token).catch(console.error);
+
+      return res.json({message: "Message was send"})
+    } catch (e) {
+      res.status(500).json(e.message)
+    }
+  }
+
   async resetPassword(req, res) {
     try {
       const {email} = req.body;
@@ -274,5 +239,16 @@ class UserController {
 
 //add delete products from restaurants on delete restaurants
 //users permission per restaurants
+//Register a New User
+//User Login
+//Get User Profile
+//Update User Profile
+//Upload User Avatar
+
+//Delete User Account
+//Change User Password
+//Admin: List All Users
+
+
 
 module.exports = new UserController()

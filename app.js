@@ -33,7 +33,7 @@ const start = async () => {
 
     // await sequelize.drop();
     app.listen(port, () => {
-      console.log("server work!!!")
+      console.log("server works!!!")
     })
   } catch (e) {
     console.log(e)
