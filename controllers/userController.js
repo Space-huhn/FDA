@@ -152,6 +152,24 @@ class UserController {
     }
   }
 
+  async delete(req, res) {
+    try {
+      if (!req.params) return res.status(401).json({message: "Error"});
+
+      const { id } = req.params;
+
+      await User.destroy(
+        {where: {id}}
+      )
+
+      return res.json({message: "Deleted profile"})
+    } catch (e) {
+      res.status(500).json(e.message)
+    }
+  }
+
+
+
   async sendMailTo(req, res) {
     try {
       const {lang, token} = req.body
@@ -244,8 +262,8 @@ class UserController {
 //Get User Profile
 //Update User Profile
 //Upload User Avatar
-
 //Delete User Account
+
 //Change User Password
 //Admin: List All Users
 

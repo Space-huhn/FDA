@@ -26,11 +26,6 @@ module.exports = function (req, res, next) {
       return res.status(403).json({ message: "Forbidden: You can only update your own profile" });
     }
 
-    // const token = req.headers.authorization.split(" ")[1]
-    // if (!token) {
-    //   return res.status(401).json({message: 'user is not login'})
-    // }
-
     req.user = jwt.verify(token, process.env.SECRET_KEY)
   } catch (e) {
     res.status(401).json({message: 'user is not login'})
