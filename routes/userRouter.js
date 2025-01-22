@@ -8,8 +8,8 @@ router.post('/login', userController.login);
 router.get('/profile/:id', authMiddleware, userController.getProfile);
 router.put('/profile/:id', authMiddleware, userController.profileUpdate);
 router.put('/profile/:id/avatar', authMiddleware, userController.avatarUpdate);
+router.put('/:id', authMiddleware, userController.changePassword);
 router.delete('/:id', authMiddleware, userController.delete);
-
 
 
 router.post('/check', userController.check);

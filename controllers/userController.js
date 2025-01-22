@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const {where} = require("sequelize");
 const nodeMailer = require('nodemailer');
 const {jwtDecode} = require('jwt-decode')
-const { Op } = require('sequelize');
+const {Op} = require('sequelize');
 
 function generateToken(id, name, email, role) {
   return jwt.sign({id, name, email, role}, process.env.SECRET_KEY, {expiresIn: '24h'})
@@ -49,7 +49,7 @@ class UserController {
       const {name, email, role, password} = req.body;
 
       const candidate = await User.findOne(
-          {where: {email}}
+        {where: {email}}
       )
 
       if (candidate) {
@@ -146,7 +146,7 @@ class UserController {
         avatar: filename
       }, {where: {id}})
 
-      return res.json({ message: 'Avatar updated successfully', avatar: filename })
+      return res.json({message: 'Avatar updated successfully', avatar: filename})
     } catch (e) {
       return res.status(500).json(e.message)
     }
@@ -156,13 +156,48 @@ class UserController {
     try {
       if (!req.params) return res.status(401).json({message: "Error"});
 
-      const { id } = req.params;
+      const {id} = req.params;
 
       await User.destroy(
         {where: {id}}
       )
 
       return res.json({message: "Deleted profile"})
+    } catch (e) {
+      res.status(500).json(e.message)
+    }
+  }
+
+  async changePassword(req, res) {
+    try {
+      if (!req.body) return res.status(401).json({message: "Empty form"});
+
+      const {id} = req.params;
+
+      const user = await User.findOne(
+        {where: {id}}
+      )
+
+      const {password, newPassword} = req.body;
+
+      if (!bcrypt.compareSync(password, user.password)) {
+        return res.status(401).json({message: "Passwords don't match"})
+      }
+
+      const hashPassword = await bcrypt.hash(password, 3);
+
+      const token = req.headers.authorization?.split(' ')[1];
+
+      const decoded = jwtDecode(token);
+
+      await User.update({
+          password: hashPassword,
+        },
+        {where: {id}}
+      )
+
+      const newToken = generateToken(decoded.id, decoded.name, decoded.email, decoded.role, decoded.isVerified)
+      return res.json({newToken})
     } catch (e) {
       res.status(500).json(e.message)
     }
@@ -263,10 +298,10 @@ class UserController {
 //Update User Profile
 //Upload User Avatar
 //Delete User Account
-
 //Change User Password
-//Admin: List All Users
 
+
+//Admin: List All Users
 
 
 module.exports = new UserController()
