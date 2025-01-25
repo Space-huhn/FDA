@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router();
 const userController = require('../controllers/userController');
 const authMiddleware = require('../middleware/authMiddleware')
+const adminMiddleware = require('../middleware/adminMiddleware')
+
 
 router.post('/registration', userController.registration);
 router.post('/login', userController.login);
@@ -10,6 +12,7 @@ router.put('/profile/:id', authMiddleware, userController.profileUpdate);
 router.put('/profile/:id/avatar', authMiddleware, userController.avatarUpdate);
 router.put('/:id', authMiddleware, userController.changePassword);
 router.delete('/:id', authMiddleware, userController.delete);
+router.get('/', adminMiddleware, userController.getAllUsers);
 
 
 router.post('/check', userController.check);

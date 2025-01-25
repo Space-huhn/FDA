@@ -203,6 +203,15 @@ class UserController {
     }
   }
 
+  async getAllUsers(req, res) {
+    try {
+      const usersList = await User.findAll()
+
+      return res.json(usersList)
+    } catch (e) {
+      res.status(500).json(e.message)
+    }
+  }
 
 
   async sendMailTo(req, res) {
@@ -299,9 +308,6 @@ class UserController {
 //Upload User Avatar
 //Delete User Account
 //Change User Password
-
-
 //Admin: List All Users
-
 
 module.exports = new UserController()

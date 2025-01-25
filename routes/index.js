@@ -9,7 +9,6 @@ const Op = require('@sequelize/core');
 
 
 router.use('/user', userRouter)
-// router.use('/product',)
 router.use('/restaurant', restaurantRouter);
 router.use('/product', productRouter);
 router.use('/category', categoryRouter);

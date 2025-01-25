@@ -28,7 +28,7 @@ module.exports = function (req, res, next) {
 
     req.user = jwt.verify(token, process.env.SECRET_KEY)
   } catch (e) {
-    res.status(401).json({message: 'user is not login'})
+    res.status(401).json({message: 'User is not login'})
   }
 
   next();
