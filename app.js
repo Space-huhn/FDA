@@ -29,8 +29,8 @@ app.use(express.urlencoded({extended: false}));
 const start = async () => {
   try {
     await db.authenticate();
-    // await db.sync({ force: true });
-    await db.sync();
+    // await db.sync({force: true});
+    await db.sync({alter: true});
 
     // await db.drop();
     app.listen(port, () => {

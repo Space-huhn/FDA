@@ -37,7 +37,7 @@ const Product = sequelize.define('product', {
   price: {type: DataTypes.FLOAT},
   ingredients: {type: DataTypes.ARRAY(DataTypes.INTEGER)},
   image: {type: DataTypes.STRING},
-  restaurantId: {type: DataTypes.INTEGER,foreignKey: true, allowNull: false},
+  restaurantId: {type: DataTypes.INTEGER, foreignKey: true, allowNull: false},
   categoryId: {type: DataTypes.INTEGER, foreignKey: true, allowNull: false},
 })
 
@@ -72,7 +72,6 @@ const OrderItems = sequelize.define('order_items', {
   quantity: {type: DataTypes.INTEGER, allowNull: false},
   price: {type: DataTypes.FLOAT, allowNull: false},
 })
-
 
 
 User.hasOne(Card)

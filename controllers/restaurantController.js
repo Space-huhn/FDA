@@ -1,4 +1,4 @@
-const {Restaurant, User, Product} = require("../models/models");
+const {Restaurant, Product} = require("../models/models");
 const uuid = require('uuid')
 const path = require('path')
 const fs = require("fs");
@@ -121,10 +121,8 @@ class RestaurantController {
         ]
       })
 
-
-
       return res.json({message: "Restaurant found", restaurant: restaurant})
-    }catch(e) {
+    } catch (e) {
       res.status(500).json(e.message)
     }
   }
