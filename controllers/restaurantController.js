@@ -1,8 +1,7 @@
-const {Restaurant, Product} = require("../models/models");
+const {Restaurant} = require("../models/models");
 const uuid = require('uuid')
 const path = require('path')
 const fs = require("fs");
-const e = require("express");
 
 class RestaurantController {
   async create(req, res) {
@@ -108,27 +107,6 @@ class RestaurantController {
 
     return res.json(restaurant)
   }
-
-
-  async test(req, res) {
-    try {
-      const {id} = req.params
-
-      const restaurant = await Restaurant.findOne({
-        where: {id},
-        include: [
-          {model: Product},
-        ]
-      })
-
-      return res.json({message: "Restaurant found", restaurant: restaurant})
-    } catch (e) {
-      res.status(500).json(e.message)
-    }
-  }
 }
-
-//add delete products from restaurants on delete restaurants
-//users permission per restaurants
 
 module.exports = new RestaurantController()

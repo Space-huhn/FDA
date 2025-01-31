@@ -11,9 +11,4 @@ router.get('/:id', restaurantsController.getRestaurant);
 router.put('/:id', adminMiddleware, restaurantsController.updateRestaurant);
 router.delete('/:id', adminMiddleware, restaurantsController.deleteRestaurant);
 
-router.get('/testAPI/:id', restaurantsController.test);
-
-
 module.exports = router;
-
-//restrict action for not authorization users

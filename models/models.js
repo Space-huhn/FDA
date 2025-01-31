@@ -2,13 +2,14 @@ const sequelize = require('../db');
 const {DataTypes} = require('sequelize');
 
 const User = sequelize.define('user', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+  id: {type: DataTypes.INTEGER, primaryKey: true, foreignKey: "userId", autoIncrement: true},
   name: {type: DataTypes.STRING, unique: false, allowNull: false, validate: {notEmpty: true}},
   email: {type: DataTypes.STRING, unique: true, allowNull: false, validate: {notEmpty: true}},
   password: {type: DataTypes.STRING, allowNull: false, validate: {notEmpty: true}},
   role: {type: DataTypes.STRING, defaultValue: 'USER'},
   avatar: {type: DataTypes.STRING},
   address: {type: DataTypes.STRING},
+  telephone: {type: DataTypes.STRING},
   isVerified: {type: DataTypes.BOOLEAN, defaultValue: false},
 })
 
@@ -31,7 +32,7 @@ const Restaurant = sequelize.define('restaurant', {
 })
 
 const Product = sequelize.define('product', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, foreignKey: "product_id", autoIncrement: true},
+  id: {type: DataTypes.INTEGER, primaryKey: true, foreignKey: "productId", autoIncrement: true},
   name: {type: DataTypes.STRING, allowNull: false},
   description: {type: DataTypes.STRING},
   price: {type: DataTypes.FLOAT},
@@ -58,19 +59,28 @@ const ProductsCategories = sequelize.define('products_categories', {
 })
 
 const Orders = sequelize.define('orders', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, foreignKey: "order_id", autoIncrement: true},
-  user_id: {type: DataTypes.INTEGER, allowNull: false},
-  price: {type: DataTypes.FLOAT, allowNull: false},
+  id: {type: DataTypes.INTEGER, primaryKey: true, foreignKey: "orderId", autoIncrement: true},
+  userId: {type: DataTypes.INTEGER, foreignKey: "userId", allowNull: false},
+  // price: {type: DataTypes.FLOAT, allowNull: false},
   deliveryAddress: {type: DataTypes.STRING, allowNull: false},
-  status: {type: DataTypes.ENUM("Pending", "Processing", "Completed", "Cancelled"), allowNull: false},
+  status: {
+    type: DataTypes.ENUM("Pending", "Processing", "Completed", "Cancelled"),
+    defaultValue: 'Pending',
+    allowNull: false
+  },
 })
 
 const OrderItems = sequelize.define('order_items', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, allowNull: false},
-  order_id: {type: DataTypes.INTEGER, foreignKey: true, allowNull: false},
-  product_id: {type: DataTypes.INTEGER, foreignKey: true, allowNull: false},
+  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
+  orderId: {
+    type: DataTypes.INTEGER, references: {
+      model: "orders",
+      key: "id",
+    }, foreignKey: true, allowNull: false
+  },
+  productId: {type: DataTypes.INTEGER, foreignKey: true, allowNull: false},
   quantity: {type: DataTypes.INTEGER, allowNull: false},
-  price: {type: DataTypes.FLOAT, allowNull: false},
+  // price: {type: DataTypes.FLOAT, allowNull: false},
 })
 
 
@@ -83,21 +93,23 @@ CardProduct.belongsTo(Card)
 Product.hasMany(CardProduct)
 CardProduct.belongsTo(Product)
 
-// Restaurant.belongsToMany(Product, {through: RestaurantProduct})
-// Product.belongsToMany(Restaurant, {through: RestaurantProduct})
-
 Restaurant.hasMany(Product);
 Product.belongsTo(Restaurant);
 
 Orders.hasMany(OrderItems);
 OrderItems.belongsTo(Orders);
 
+Orders.belongsTo(User);
+User.hasMany(Orders);
+
 OrderItems.belongsTo(Product);
 Product.hasMany(OrderItems);
 
-
 // RestaurantContact.hasOne(Restaurant)
 // Restaurant.belongsTo(RestaurantContact)
+
+// Restaurant.belongsToMany(Product, {through: RestaurantProduct})
+// Product.belongsToMany(Restaurant, {through: RestaurantProduct})
 
 Product.hasOne(ProductsCategories)
 // ProductsCategories.hasMany(Product)

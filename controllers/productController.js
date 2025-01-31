@@ -1,4 +1,4 @@
-const {Product, User} = require("../models/models");
+const {Product} = require("../models/models");
 const uuid = require("uuid");
 const path = require("path");
 const fs = require('fs')

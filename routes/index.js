@@ -6,8 +6,6 @@ const categoryRouter = require('./categoryRouter');
 const userRouter = require('./userRouter');
 const orderRouter = require('./orderRouter')
 const Op = require('@sequelize/core');
-// import { Op } from '@sequelize/core';
-
 
 router.use('/user', userRouter)
 router.use('/restaurant', restaurantRouter);
@@ -16,14 +14,3 @@ router.use('/category', categoryRouter);
 router.use('/order', orderRouter);
 
 module.exports = router;
-
-
-//try modification from another PC
-
-
-
-
-
-
-
-

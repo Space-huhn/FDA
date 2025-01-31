@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const categoryController = require('../controllers/categoryController');
 const authMiddleware = require('../middleware/authMiddleware')
+const adminMiddleware = require('../middleware/adminMiddleware')
 
 
-router.post('/', categoryController.create);
+router.post('/', adminMiddleware, categoryController.create);
 
 router.get('/', categoryController.getAllCategories);
 
@@ -15,5 +16,3 @@ router.put('/:id', authMiddleware, categoryController.updateCategory);
 router.delete('/:id', authMiddleware, categoryController.deleteCategory);
 
 module.exports = router;
-
-//restrict action for not authorization users
