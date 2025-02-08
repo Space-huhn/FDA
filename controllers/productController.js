@@ -20,24 +20,26 @@ class ProductController {
 
   async getAllProducts(req, res) {
     try {
-      const {restaurantId, categoryId} = req.query;
-
+      let {restaurantId, categoryId, page, limit} = req.query;
+      page = page || 1;
+      limit = limit || 9;
+      let offset = page * limit - limit;
       let products;
 
       if (!restaurantId && !categoryId) {
-        products = await Product.findAll();
+        products = await Product.findAndCountAll({limit, offset});
       }
 
       if (restaurantId && !categoryId) {
-        products = await Product.findAll({where: {restaurantId}});
+        products = await Product.findAll({where: {restaurantId}, limit, offset});
       }
 
       if (!restaurantId && categoryId) {
-        products = await Product.findAll({where: {categoryId}});
+        products = await Product.findAll({where: {categoryId}, limit, offset});
       }
 
       if (restaurantId && categoryId) {
-        products = await Product.findAll({where: {restaurantId, categoryId}});
+        products = await Product.findAll({where: {restaurantId, categoryId}, limit, offset});
       }
 
       return res.json(products)

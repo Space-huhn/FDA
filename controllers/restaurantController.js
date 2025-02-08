@@ -56,7 +56,14 @@ class RestaurantController {
   }
 
   async getAllRestaurants(req, res) {
-    const restaurants = await Restaurant.findAll()
+    let {page, limit} = req.query;
+    page = page || 1;
+    limit = limit || 9;
+    let offset = page * limit - limit;
+
+    const restaurants = await Restaurant.findAndCountAll(
+      {limit, offset}
+    )
     return res.json(restaurants)
   }
 
